@@ -1,80 +1,99 @@
-const toyList = document.querySelector("#toy-collection")
-const addToyForm = document.querySelector(".add-toy-form")
+const toyForm = document.querySelector('.add-toy-form')
+const toyCollection = document.querySelector('#toy-collection')
 
-let addToy = false;
+let addToy = false
+
+const getToyData = () => {
+  fetch('http://localhost:3000/toys')
+  .then(res => res.json())
+  .then((toysArray) => {
+    toysArray.forEach((toy) => {
+      turnToyToHTML(toy)
+    })
+  })
+}
+getToyData()
 
 
-function getToyData() {
-  return fetch('http://localhost:3000/toys')
-    .then(response => response.json())
+
+const turnToyToHTML = (toy) => {
+
+  // create a div element for card
+  const cardDiv = document.createElement('div')
+  cardDiv.className = "card"
+
+  // create an h2 tag
+  const toyName = document.createElement('h2')
+  toyName.innerText = toy.name
+
+  // create an image tag
+  const toyImage = document.createElement('img')
+  toyImage.src = toy.image
+  toyImage.alt = toy.name
+  toyImage.className = "toy-avatar"
+
+  // create a p tag
+  const toyLikes = document.createElement('p')
+  toyLikes.innerText = toy.likes
+
+  // create a button tag
+  const likeButton = document.createElement('button')
+  likeButton.className = "like-btn"
+  likeButton.innerText = "Like"
+
+  // create attributes
+
+
+  // slap on dom
+  cardDiv.append(toyName, toyImage, toyLikes, likeButton)
+  toyCollection.append(cardDiv)
+
+  likeButton.addEventListener('click', (e) => {
+
+    let newNumber = toy.likes + 1
+
+    fetch(`http://localhost:3000/toys/${toy.id}`, {
+      method: 'PATCH',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        likes: newNumber
+      })
+    })
+    .then(res => res.json())
+    .then((updatedToy) => {
+      // update the DOM
+      toyLikes.innerText = updatedToy.likes
+      // update the object in memory
+      toy.likes = updatedToy.likes
+    })
+  })
 }
 
-getToyData().then(toys => {
-  toys.forEach(toy => {
-    //function to render toys goes here or something
-    renderToy(toy)
+
+
+toyForm.addEventListener('submit', (e) => {
+  e.preventDefault()
+  let newToyName = e.target.name.value
+  let newToyImg = e.target.image.value
+  fetch(`http://localhost:3000/toys`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      name: newToyName,
+      image: newToyImg,
+      likes: 0
+    })
+  })
+  .then(res => res.json())
+  .then((createdToy) => {
+    turnToyToHTML(createdToy)
+    e.target.reset()
   })
 })
-
-
-
-addToyForm.addEventListener('submit', function(evt) {
-  evt.preventDefault()
-  let toyName = evt.target.name.value
-  let toyURL = evt.target.url_name.value
-
-  fetch("http://localhost:3000/toys", {
-        method: "POST",
-        headers: {
-            'Content-Type': 'application/json',
-            Accept: "application/json"
-        },
-        body: JSON.stringify({
-            "name": toyName,
-            "image": toyURL,
-            "likes": 0
-        })
-    })
-        .then(res => res.json())
-        .then((addToy) => {
-            turnObjToLi();
-            evt.target.reset()
-        })
-
-
-
-
-
-  fetch("http://localhost:3000/toys", )
-})
-
-
-
-
-function renderToy(toy) {
-  const cardDiv = document.createElement("div")
-  //  h2 tag with the toy's name
-  const nameHeader = document.createElement("h2")
-  // img tag with the src of the toy's image attribute and the class name "toy-avatar"
-  const toyImg = document.createElement("img")
-  // p tag with how many likes that toy has
-  const likesP = document.createElement("p")
-  // button tag with a class "like-btn"
-  const likeButton = document.createElement("button")
-
-  toyImg.className = "toy-avatar"
-  cardDiv.classList.add("card")
-  likeButton.classList.add("like-btn")
-  toyImg.classList.add("toy-avatar")
-
-  nameHeader.innerText = toy.name
-  toyImg.src= toy.image
-  likesP.innerText = `${toy.likes} Likes`
-
-  cardDiv.append(nameHeader, toyImg, likesP, likeButton)
-  toyList.append(cardDiv)
-}
-
 
 document.addEventListener("DOMContentLoaded", () => {
   const addBtn = document.querySelector("#new-toy-btn");
@@ -89,5 +108,3 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
-
-

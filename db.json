@@ -4,13 +4,13 @@
       "id": 1,
       "name": "Woody",
       "image": "http://www.pngmart.com/files/3/Toy-Story-Woody-PNG-Photos.png",
-      "likes": 5
+      "likes": 10
     },
     {
       "id": 2,
       "name": "Buzz Lightyear",
       "image": "http://www.pngmart.com/files/6/Buzz-Lightyear-PNG-Transparent-Picture.png",
-      "likes": 10
+      "likes": 14
     },
     {
       "id": 3,
@@ -46,79 +46,13 @@
       "id": 8,
       "name": "Little Green Men",
       "image": "http://www.pngmart.com/files/3/Toy-Story-Alien-PNG-File.png",
-      "likes": 1
+      "likes": 6
     },
     {
-      "name": "jacob",
-      "image": "my toy",
+      "name": "Alex ",
+      "image": "http://www.pngmart.com/files/3/Toy-Story-Alien-PNG-File.png",
       "likes": 0,
       "id": 9
-    },
-    {
-      "name": "jacob",
-      "image": "my toy",
-      "likes": 0,
-      "id": 10
-    },
-    {
-      "name": "jacob",
-      "image": "my toy",
-      "likes": 0,
-      "id": 11
-    },
-    {
-      "name": "jacob",
-      "image": "my toy",
-      "likes": 0,
-      "id": 12
-    },
-    {
-      "name": "jacob",
-      "image": "my toy",
-      "likes": 0,
-      "id": 13
-    },
-    {
-      "name": "jacob",
-      "image": "my toy",
-      "likes": 0,
-      "id": 14
-    },
-    {
-      "name": "jacob",
-      "image": "my toy",
-      "likes": 0,
-      "id": 15
-    },
-    {
-      "name": "jacob",
-      "image": "my toy",
-      "likes": 0,
-      "id": 16
-    },
-    {
-      "name": "jacob",
-      "image": "my toy",
-      "likes": 0,
-      "id": 17
-    },
-    {
-      "name": "jacob",
-      "image": "my toy",
-      "likes": 0,
-      "id": 18
-    },
-    {
-      "name": "jacob",
-      "image": "my toy",
-      "likes": 0,
-      "id": 19
-    },
-    {
-      "name": "jacob",
-      "image": "death please",
-      "likes": 0,
-      "id": 20
     }
   ]
 }
